@@ -1,0 +1,24 @@
+[
+    {
+        "ticket_id": "TKT-83417",
+        "customer_id": "SLT0004",
+        "customer_name": "Dilani Jayawardena",
+        "issue_type": "Billing Issue",
+        "priority": "High",
+        "complaint": "i have pay my bill twice",
+        "solution": "Dear Dilani,\n\nWe apologize for the inconvenience caused by the duplicate payment. We understand this is a high priority for you.\n\nHere are the steps to resolve this issue:\n\n1.  **Provide Payment Details:** Please reply with the transaction IDs, dates, and amounts for both payments, or visit your nearest SLT Teleshop with the payment receipts.\n2.  **Investigation & Adjustment:** Our billing team will promptly investigate the duplicate payment. The extra amount will be credited to your next bill, or a refund will be processed as per your preference.\n3.  **Confirmation:** We will contact you within 2-3 business days with an update on the resolution.\n\nThank you for your patience.",
+        "status": "Open",
+        "created_at": "2026-05-04 17:35:13"
+    },
+    {
+        "ticket_id": "TKT-85936",
+        "customer_id": "SLT0007",
+        "customer_name": "Pradeep Rajapaksa",
+        "issue_type": "Router Problem",
+        "priority": "High",
+        "complaint": "my connection is disconnecting frequently",
+        "solution": "Dear Mr. Rajapaksa,\n\nWe understand your connection is frequently disconnecting, and we apologize for the inconvenience. Please try the following steps to resolve the issue:\n\n1.  **Restart your Router:** Unplug the power adapter from your SLT router, wait for 30 seconds, and then plug it back in. Allow a few minutes for the lights to stabilize.\n2.  **Check Cables:** Ensure that all cables, especially the grey DSL cable connecting your router to the telephone wall socket, are securely plugged in and not damaged.\n3.  **Observe Indicator Lights:** After restarting, check the indicator lights on your router. The 'DSL' or 'ADSL' light should be solid green (not blinking). If it's blinking or off, or if the issue persists after these steps, please contact SLT technical support at 1212 for further assistance.",
+        "status": "Open",
+        "created_at": "2026-05-04 17:36:58"
+    }
+]

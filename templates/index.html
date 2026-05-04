@@ -1,0 +1,556 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SLT Telecom - Complaint Resolution System</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", sans-serif;
+        background: #f0f4f8;
+        min-height: 100vh;
+      }
+
+      .header {
+        background: linear-gradient(135deg, #003580, #0057b8);
+        color: white;
+        padding: 20px 40px;
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+      }
+
+      .header img {
+        height: 50px;
+      }
+
+      .header h1 {
+        font-size: 22px;
+        font-weight: 600;
+      }
+
+      .header p {
+        font-size: 13px;
+        opacity: 0.85;
+      }
+
+      .container {
+        max-width: 900px;
+        margin: 40px auto;
+        padding: 0 20px;
+      }
+
+      .card {
+        background: white;
+        border-radius: 12px;
+        padding: 30px;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+        margin-bottom: 30px;
+      }
+
+      .card h2 {
+        color: #003580;
+        margin-bottom: 20px;
+        font-size: 18px;
+        border-bottom: 2px solid #e8f0fe;
+        padding-bottom: 10px;
+      }
+
+      label {
+        display: block;
+        font-weight: 600;
+        color: #444;
+        margin-bottom: 6px;
+        font-size: 14px;
+      }
+
+      select,
+      textarea {
+        width: 100%;
+        padding: 12px 15px;
+        border: 2px solid #e0e0e0;
+        border-radius: 8px;
+        font-size: 14px;
+        margin-bottom: 20px;
+        transition: border 0.3s;
+        font-family: inherit;
+      }
+
+      select:focus,
+      textarea:focus {
+        outline: none;
+        border-color: #0057b8;
+      }
+
+      textarea {
+        height: 100px;
+        resize: vertical;
+      }
+
+      .btn {
+        background: linear-gradient(135deg, #003580, #0057b8);
+        color: white;
+        border: none;
+        padding: 14px 35px;
+        border-radius: 8px;
+        font-size: 15px;
+        font-weight: 600;
+        cursor: pointer;
+        width: 100%;
+        transition: opacity 0.3s;
+      }
+
+      .btn:hover {
+        opacity: 0.9;
+      }
+      .btn:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+
+      .loading {
+        display: none;
+        text-align: center;
+        padding: 30px;
+        color: #0057b8;
+        font-size: 15px;
+      }
+
+      .spinner {
+        border: 4px solid #e0e0e0;
+        border-top: 4px solid #0057b8;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        animation: spin 1s linear infinite;
+        margin: 0 auto 15px;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      .result {
+        display: none;
+      }
+
+      .ticket-header {
+        background: linear-gradient(135deg, #003580, #0057b8);
+        color: white;
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .ticket-id {
+        font-size: 20px;
+        font-weight: 700;
+      }
+
+      .badge {
+        padding: 6px 16px;
+        border-radius: 20px;
+        font-size: 13px;
+        font-weight: 700;
+      }
+
+      .badge-high {
+        background: #ff4444;
+        color: white;
+      }
+      .badge-medium {
+        background: #ff9800;
+        color: white;
+      }
+      .badge-low {
+        background: #4caf50;
+        color: white;
+      }
+      .badge-open {
+        background: #e8f0fe;
+        color: #003580;
+      }
+
+      .info-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+        margin-bottom: 20px;
+      }
+
+      .info-box {
+        background: #f8faff;
+        border: 1px solid #e8f0fe;
+        border-radius: 8px;
+        padding: 15px;
+      }
+
+      .info-box .label {
+        font-size: 11px;
+        color: #888;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 5px;
+      }
+
+      .info-box .value {
+        font-size: 15px;
+        font-weight: 600;
+        color: #222;
+      }
+
+      .solution-box {
+        background: #f0f9f0;
+        border: 1px solid #c8e6c9;
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+        white-space: pre-wrap;
+        font-size: 14px;
+        line-height: 1.7;
+        color: #2e7d32;
+      }
+
+      .message-box {
+        background: #e8f0fe;
+        border: 1px solid #c5d8f8;
+        border-radius: 8px;
+        padding: 20px;
+        font-size: 14px;
+        line-height: 1.7;
+        color: #003580;
+        white-space: pre-wrap;
+      }
+
+      .section-title {
+        font-weight: 700;
+        color: #003580;
+        margin-bottom: 10px;
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .agent-steps {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 25px;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .step {
+        flex: 1;
+        min-width: 100px;
+        text-align: center;
+        padding: 10px 5px;
+        border-radius: 8px;
+        font-size: 11px;
+        font-weight: 600;
+        background: #e8f0fe;
+        color: #003580;
+      }
+
+      .step.active {
+        background: #003580;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <div>
+        <h1>🔧 SLT Telecom — AI Complaint Resolution System</h1>
+        <p>Multi-Agent System | Powered by Google Gemini AI</p>
+      </div>
+    </div>
+
+    <div class="container">
+      <!-- Input Card -->
+      <div class="card">
+        <h2>📋 Submit Customer Complaint</h2>
+
+        <label>Customer ID</label>
+        <input
+          type="text"
+          id="customerId"
+          placeholder="e.g. SLT0001, SLT0002, SLT0003..."
+          style="
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: inherit;
+            margin-bottom: 5px;
+          "
+          oninput="validateCustomerId()"
+        />
+
+        <div
+          id="customerIdMsg"
+          style="
+            display: none;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            padding: 8px 12px;
+            border-radius: 6px;
+          "
+        ></div>
+
+        <div
+          id="customerPreview"
+          style="
+            display: none;
+            margin-bottom: 15px;
+            background: #e8f5e9;
+            border: 1px solid #c8e6c9;
+            border-radius: 8px;
+            padding: 12px 15px;
+            font-size: 13px;
+            color: #2e7d32;
+          "
+        ></div>
+
+        <div style="margin-bottom: 20px; font-size: 12px; color: #888">
+          💡 Available IDs: SLT0001, SLT0002, SLT0003, SLT0004 (or any you
+          added)
+        </div>
+
+        <label>Customer Complaint</label>
+        <textarea
+          id="complaint"
+          placeholder="Type the customer complaint here...
+Example: My internet is very slow since yesterday. I cannot work from home."
+        ></textarea>
+
+        <button class="btn" onclick="submitComplaint()" id="submitBtn">
+          🚀 Process Complaint with AI Agents
+        </button>
+      </div>
+
+      <!-- Loading -->
+      <div class="loading" id="loading">
+        <div class="spinner"></div>
+        <p>AI Agents are processing the complaint...</p>
+        <br />
+        <div class="agent-steps">
+          <div class="step" id="s1">📥 Input</div>
+          <div class="step" id="s2">👤 History</div>
+          <div class="step" id="s3">🔍 Classify</div>
+          <div class="step" id="s4">⚡ Priority</div>
+          <div class="step" id="s5">💡 Solution</div>
+          <div class="step" id="s6">🎫 Ticket</div>
+          <div class="step" id="s7">✉️ Response</div>
+        </div>
+      </div>
+
+      <!-- Result Card -->
+      <div class="card result" id="result">
+        <h2>✅ Complaint Processed Successfully</h2>
+
+        <div class="ticket-header">
+          <div>
+            <div style="font-size: 12px; opacity: 0.8; margin-bottom: 4px">
+              TICKET ID
+            </div>
+            <div class="ticket-id" id="ticketId">—</div>
+          </div>
+          <div style="text-align: right">
+            <span class="badge badge-open">🟢 OPEN</span>
+          </div>
+        </div>
+
+        <div class="info-grid">
+          <div class="info-box">
+            <div class="label">Customer Name</div>
+            <div class="value" id="customerName">—</div>
+          </div>
+          <div class="info-box">
+            <div class="label">Package</div>
+            <div class="value" id="package">—</div>
+          </div>
+          <div class="info-box">
+            <div class="label">Location</div>
+            <div class="value" id="location">—</div>
+          </div>
+          <div class="info-box">
+            <div class="label">Issue Type</div>
+            <div class="value" id="issueType">—</div>
+          </div>
+          <div class="info-box">
+            <div class="label">Priority Level</div>
+            <div class="value" id="priority">—</div>
+          </div>
+          <div class="info-box">
+            <div class="label">Status</div>
+            <div class="value">🟢 Open</div>
+          </div>
+        </div>
+
+        <div class="section-title">💡 Suggested Solution</div>
+        <div class="solution-box" id="solution">—</div>
+
+        <div class="section-title">✉️ Message to Customer</div>
+        <div class="message-box" id="finalMessage">—</div>
+      </div>
+    </div>
+
+    <script>
+      let stepIndex = 0;
+      let stepInterval;
+
+      function animateSteps() {
+        stepIndex = 0;
+        const steps = ["s1", "s2", "s3", "s4", "s5", "s6", "s7"];
+        steps.forEach((s) =>
+          document.getElementById(s).classList.remove("active"),
+        );
+        stepInterval = setInterval(() => {
+          if (stepIndex < steps.length) {
+            document.getElementById(steps[stepIndex]).classList.add("active");
+            stepIndex++;
+          } else {
+            clearInterval(stepInterval);
+          }
+        }, 800);
+      }
+      async function validateCustomerId() {
+        const customerId = document
+          .getElementById("customerId")
+          .value.trim()
+          .toUpperCase();
+        const input = document.getElementById("customerId");
+        const msgBox = document.getElementById("customerIdMsg");
+        const preview = document.getElementById("customerPreview");
+
+        // Clear if empty
+        if (!customerId) {
+          input.style.borderColor = "#e0e0e0";
+          msgBox.style.display = "none";
+          preview.style.display = "none";
+          return;
+        }
+
+        // Fetch customers from server
+        const response = await fetch("/api/customers");
+        const customers = await response.json();
+
+        if (customers[customerId]) {
+          const c = customers[customerId];
+
+          // Valid — show green
+          input.style.borderColor = "#4caf50";
+          msgBox.style.display = "block";
+          msgBox.style.background = "#e8f5e9";
+          msgBox.style.color = "#2e7d32";
+          msgBox.textContent = `✅ Customer found!`;
+
+          // Show customer preview
+          preview.style.display = "block";
+          preview.innerHTML = `
+    <strong>👤 ${c.name}</strong> &nbsp;|&nbsp;
+    📦 ${c.package} &nbsp;|&nbsp;
+    📍 ${c.location} &nbsp;|&nbsp;
+    🕓 Past Complaints: <strong>${
+      c.past_complaints.length > 0 ? c.past_complaints.join(", ") : "None"
+    }</strong>
+`;
+
+          // Auto uppercase the input
+          document.getElementById("customerId").value = customerId;
+        } else {
+          // Invalid — show red
+          input.style.borderColor = "#f44336";
+          msgBox.style.display = "block";
+          msgBox.style.background = "#ffe0e0";
+          msgBox.style.color = "#c62828";
+          msgBox.textContent = `❌ Customer ID "${customerId}" not found! Please add this customer first.`;
+          preview.style.display = "none";
+        }
+      }
+      // Call on page load
+      loadCustomers();
+      async function submitComplaint() {
+        const complaint = document.getElementById("complaint").value.trim();
+        const customerId = document.getElementById("customerId").value;
+
+        if (!complaint) {
+          alert("Please enter a complaint!");
+          return;
+        }
+
+        // Validate customer ID before submitting
+        const response2 = await fetch("/api/customers");
+        const customers2 = await response2.json();
+        if (!customers2[customerId]) {
+          const input = document.getElementById("customerId");
+          const msgBox = document.getElementById("customerIdMsg");
+          input.style.borderColor = "#f44336";
+          msgBox.style.display = "block";
+          msgBox.style.background = "#ffe0e0";
+          msgBox.style.color = "#c62828";
+          msgBox.textContent = `❌ Customer ID "${customerId}" not found!`;
+          return;
+        }
+
+        // Show loading
+        document.getElementById("loading").style.display = "block";
+        document.getElementById("result").style.display = "none";
+        document.getElementById("submitBtn").disabled = true;
+        animateSteps();
+
+        try {
+          const response = await fetch("/submit", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ complaint, customer_id: customerId }),
+          });
+
+          const data = await response.json();
+          clearInterval(stepInterval);
+
+          // Fill results
+          document.getElementById("ticketId").textContent = data.ticket_id;
+          document.getElementById("customerName").textContent = data.customer;
+          document.getElementById("package").textContent = data.package;
+          document.getElementById("location").textContent = data.location;
+          document.getElementById("issueType").textContent = data.issue_type;
+          document.getElementById("finalMessage").textContent =
+            data.final_message;
+          document.getElementById("solution").textContent = data.solution;
+
+          // Priority badge
+          const p = data.priority.toLowerCase();
+          document.getElementById("priority").innerHTML =
+            `<span class="badge badge-${p}">${data.priority}</span>`;
+
+          // Show result
+          document.getElementById("loading").style.display = "none";
+          document.getElementById("result").style.display = "block";
+        } catch (err) {
+          alert("Error processing complaint. Check terminal for details.");
+          document.getElementById("loading").style.display = "none";
+        }
+
+        document.getElementById("submitBtn").disabled = false;
+      }
+    </script>
+  </body>
+</html>

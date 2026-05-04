@@ -1,0 +1,94 @@
+{
+    "SLT0001": {
+        "customer_id": "SLT0001",
+        "name": "Nimal Perera",
+        "package": "Fiber 100Mbps",
+        "location": "Colombo",
+        "past_complaints": [
+            "Slow internet",
+            "Router restart issue"
+        ]
+    },
+    "SLT0002": {
+        "customer_id": "SLT0002",
+        "name": "Kamal Silva",
+        "package": "ADSL",
+        "location": "Kandy",
+        "past_complaints": [
+            "Billing issue"
+        ]
+    },
+    "SLT0003": {
+        "customer_id": "SLT0003",
+        "name": "Saman Fernando",
+        "package": "Fiber 200Mbps",
+        "location": "Galle",
+        "past_complaints": []
+    },
+    "SLT0004": {
+        "customer_id": "SLT0004",
+        "name": "Dilani Jayawardena",
+        "package": "IPTV + Fiber 50Mbps",
+        "location": "Negombo",
+        "past_complaints": [
+            "IPTV not working",
+            "Slow internet",
+            "Billing Issue"
+        ]
+    },
+    "SLT0005": {
+        "customer_id": "SLT0005",
+        "name": "Ruwan Bandara",
+        "package": "Fiber 100Mbps",
+        "location": "Kurunegala",
+        "past_complaints": [
+            "Payment issue",
+            "Connection drop"
+        ]
+    },
+    "SLT0006": {
+        "customer_id": "SLT0006",
+        "name": "Chamari Dissanayake",
+        "package": "Fiber 200Mbps",
+        "location": "Ratnapura",
+        "past_complaints": []
+    },
+    "SLT0007": {
+        "customer_id": "SLT0007",
+        "name": "Pradeep Rajapaksa",
+        "package": "ADSL",
+        "location": "Matara",
+        "past_complaints": [
+            "No internet connection",
+            "Slow internet",
+            "Router Problem"
+        ]
+    },
+    "SLT0008": {
+        "customer_id": "SLT0008",
+        "name": "Sanduni Wijesinghe",
+        "package": "IPTV + Fiber 100Mbps",
+        "location": "Jaffna",
+        "past_complaints": [
+            "IPTV freezing",
+            "Router problem"
+        ]
+    },
+    "SLT0009": {
+        "customer_id": "SLT0009",
+        "name": "Lasith Kumara",
+        "package": "Fiber 50Mbps",
+        "location": "Anuradhapura",
+        "past_complaints": []
+    },
+    "SLT0010": {
+        "customer_id": "SLT0010",
+        "name": "Menaka Gunawardena",
+        "package": "Fiber 100Mbps",
+        "location": "Badulla",
+        "past_complaints": [
+            "Fiber cut",
+            "No signal"
+        ]
+    }
+}
