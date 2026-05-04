@@ -1,10 +1,11 @@
 import json
 import os
+from pathlib import Path
 
-CUSTOMER_FILE = "customers.json"
+CUSTOMER_FILE = Path(__file__).parent / "data" / "customers.json"
 
 def load_customers() -> dict:
-    if os.path.exists(CUSTOMER_FILE):
+    if CUSTOMER_FILE.exists():
         with open(CUSTOMER_FILE, "r") as f:
             return json.load(f)
     return {}

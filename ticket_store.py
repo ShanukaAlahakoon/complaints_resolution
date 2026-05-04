@@ -3,7 +3,7 @@ import os
 from datetime import datetime
 from pathlib import Path
 
-TICKET_FILE = Path(__file__).with_name("tickets.json")
+TICKET_FILE = Path(__file__).parent / "data" / "tickets.json"
 
 
 def _read_tickets() -> list:
